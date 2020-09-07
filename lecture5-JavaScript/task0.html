@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- 功能：输入task item并列表显示-->
+<!-- 改进：-->
+<html>
+    <head>
+        <script>
+            document.addEventListener('DOMContentLoaded',function(){
+                document.querySelector('#new-task').onsubmit = function(){
+
+                    //creat new items
+                    const li = document.createElement('li');
+                    li.innerHTML = document.querySelector('#task').value;
+
+                    //add new items
+                    document.querySelector('#tasks').append(li);
+
+                    //clean input field
+                    document.querySelector('#task').value = '';
+
+                    //stop form from submitting 
+                    return false;
+                };
+            });
+            
+
+        </script>
+        <title>My Website</title>
+    </head>
+    <body>
+        <h1>Task</h1>
+        <ul id = "tasks"> 
+
+        </ul>
+        <form id = "new-task">
+            <input id="task" autocomplete="off" autofocus placeholder="New Task" type="text">
+            <input type="submit">
+        </form>
+    </body>
+</html>

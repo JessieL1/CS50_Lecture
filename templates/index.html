@@ -1,0 +1,34 @@
+<!--DOCTYPE html>
+<html>
+    <head>
+        <title>My website</title>
+    </head>
+    <body>
+        <h1>Names</h1>
+        <ul>
+            {% for name in Names %}
+            <li>{{name}}</li>
+            {% endfor %}
+        </ul>
+        <a href="{{url_for('more')}}">for more...</a>
+        
+    </body>
+</html-->
+
+{% extends "layout.html" %} 
+
+{% block heading %}
+    Fisrt page
+{% endblock %}
+
+{% block blody %}
+    <p>
+        sakfdhsfd fidt   dsljd 
+    </p>
+    <ul>
+        {% for name in Names %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{url_for('more')}}">for more...</a>
+{% endblock %}

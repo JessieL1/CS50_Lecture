@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- 功能：点击不同的button，显示不同的颜色-->
+<!-- 改进：对于颜色选择进行概括-->
+<html>
+    <head>
+        <script>
+            document.addEventListener('DOMContentLoaded',function(){
+                
+                //querySelectorAll返回所有matched的结果
+                //.color-change 属于color-change类的
+                //forEach  have each button change the color
+                
+                document.querySelectorAll('.color-change').forEach(function(button){
+                    button.onclick = function(){
+                        //dataset data属性下的自定义的color属性
+                        document.querySelector('#hello').style.color = button.dataset.color;
+                    };
+                });
+            });
+        </script>
+        <title>My Website</title>
+    </head>
+    <body>
+        <h1 id="hello">Hello!</h1>
+        <button class="color-change" data-color='red'>Red</button> 
+        <button class="color-change" data-color='blue'>Blue</button>
+        <button class="color-change" data-color='green'>Green</button>
+    </body>
+</html>

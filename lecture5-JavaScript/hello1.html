@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- 功能：输入用户 姓名。alert提示hello姓名-->
+<html>
+    <head>
+        <script>
+            document.addEventListener('DOMContentLoaded',function(){
+                //用#form取id为form的form表单
+                //.onsubmit 表示 when the form is submited, call the fuction
+                document.querySelector('#form').onsubmit = function(){
+                    //用#name取id为name的input field 
+                    //用.value取该input field的用户输入的值
+                    const name = document.querySelector('#name').value;
+                    alert(`Hello ${name}!`);
+
+                };
+    
+            });
+
+        </script>
+        <title>My Website</title>
+    </head>
+    <body>
+        <form id="form">
+            <input id="name" autocomplete="off" autofocus placeholder="Name" type="text">
+            <input type="submit">
+        </form>
+        
+    </body>
+</html>

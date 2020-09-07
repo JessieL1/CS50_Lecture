@@ -1,0 +1,28 @@
+<!--DOCTYPE html>
+<html>
+    <head>
+        <title>My website</title>
+    </head>
+    <body>
+        <h1>Content</h1>
+        <p>This is the second pages.</p>
+        <p>Try more.</p>
+        <a href="{{url_for('index')}}">go back...</a>
+        
+    </body>
+</html-->
+
+{% extends "layout.html" %} 
+
+{% block heading %}
+    Second page
+{% endblock %}
+
+{% block blody %}
+    <p>
+        second one and more details 
+    </p>
+    <p>This is the second pages.</p>
+    <p>Try more.</p>
+    <a href="{{url_for('index')}}">go back...</a>
+{% endblock %}

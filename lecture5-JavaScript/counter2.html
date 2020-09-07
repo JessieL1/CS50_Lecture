@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- 功能：标题为数字0，每次click后，数字增加,整10倍有alert提示-->
+<!-- 改进：button标签里不加任何事件，而是在<script>内进行定义-->
+<html>
+    <head>
+        <script>
+            //DOM:Document Object Model
+            //事件DOMContentLoaded : DOM，整个页面loaded完成
+            document.addEventListener('DOMContentLoaded',function(){
+                //when the button is clicked on, call the count fuction
+                document.querySelector('button').onclick = count;
+                
+            });
+
+            //define a variable
+            let counter = 0;
+
+            function count(){
+                counter++;
+                //extract the item that has id with name counter
+                //详见CS50.md querySelector的用法  
+                document.querySelector('#counter').innerHTML = counter;
+
+                if (counter % 10 ==0){
+                    alert(`Counter is at ${counter}!`);
+                }
+            }
+            
+        </script>
+        <title>My Website</title>
+    </head>
+    <body>
+        <h1 id = "counter">0</h1>
+        <!-- 加id便于后续找这个标签-->
+        <button>Click Here!</button>       
+        <!-- 事件onclick会调用count()函数-->
+    </body>
+</html>

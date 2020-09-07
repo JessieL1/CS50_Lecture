@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- 功能：标题为数字0，每次click后，数字增加-->
+<html>
+    <head>
+        <script>
+
+            //define a variable
+            let counter = 0;
+
+            function count(){
+                counter++;
+                //extract the item that has id with name counter
+                //详见CS50.md querySelector的用法  
+                document.querySelector('#counter').innerHTML = counter;
+            }
+            
+        </script>
+        <title>My Website</title>
+    </head>
+    <body>
+        <h1 id = "counter">0</h1>
+        <!-- 加id便于后续找这个标签-->
+        <button onclick="count()">Click Here!</button>       
+        <!-- 事件onclick会调用count()函数-->
+    </body>
+</html>

@@ -1,0 +1,19 @@
+{% extends "layout3.html" %}
+
+{% block title %}
+    ALL Flights
+{% endblock %}
+
+{% block blody %}
+    <h1>All flights</h1>
+    
+    <ul>
+        {% for flight in flights %}
+        <li>
+            <a href="{{ url_for('flight',flight_id=flight.id)}}">
+                {{flight.origin}} to {{flight.destination}}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

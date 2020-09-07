@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!-- 功能：滚动页面，自动加载20条post-->
+<!-- 代码说明：load函数会被调用两次，一次是监听到页面加载，无需用户操作，显示20条，第二次是在用户滚动中，当达到页面底端，加载20条-->
+<!-- 代码说明：load函数发送request请求获取数据信息，并对每一个信息，调用add_post函数显示在dom页面上-->
+<!-- 改进：隐藏时先动画渐变为透明，然后消失隐藏,加滑动效果，重点在于改@keyframes-->
+<html>
+    <head>       
+        <title>Load posts as you scroll down</title>
+        <style>
+            @keyframes hide {
+                0% {
+                    opacity: 1;
+                    height: 100%;
+                    line-height: 100%;
+                    padding: 20px;
+                    margin-bottom: 10px;
+                }
+                75% {
+                    opacity: 0;
+                    height: 100%;
+                    line-height: 100%;
+                    padding: 20px;
+                    margin-bottom: 10px;
+                }
+                100% {
+                    opacity: 0;
+                    height: 0px;
+                    line-height: 0px;
+                    padding: 0px;
+                    margin-bottom: 0px;
+                }
+            }
+            .post {
+                background-color:#77dd11;
+                padding:20px;
+                margin: 10px;
+                animation-name: hide;
+                animation-duration: 2s;
+                animation-fill-mode: forwards;
+                animation-play-state: paused;              
+            }
+
+            .hide {
+                background-color:#eeb311;
+                float:right;
+            }
+
+            body {
+                padding-bottom: 50px;
+            }
+        </style>
+
+
+
+        <script>
+            //定义起始post和一次展示多少个post
+            let counter = 1;
+            const quantity = 20;
+
+            //页面初次加载完，无需users操作，调用load函数显示20条post
+            document.addEventListener('DOMContentLoaded',load);
+
+            window.onscroll = () =>{
+                
+                //到达底部，则调用load函数再加载20条
+                if (window.innerHeight+window.scrollY >= document.body.offsetHeight){
+                    load();
+                }
+            }
+
+            //监听到click操作
+            document.addEventListener('click',event =>{
+                const element = event.target;
+                if (element.className === 'hide') {
+                    element.parentElement.style.animationPlayState = 'running';
+                    element.parentElement.addEventListener('animationend', () =>{
+                        element.parentElement.remove();
+                    });
+
+                }
+            });
+
+            function load() {
+                //刷新下次需要展示的内容
+                const start = counter;
+                const end = start + quantity - 1
+                counter = end + 1
+                console.log(counter)
+
+                //取post内容
+                //----什么时候用到XMLHttpRequest();
+                const request = new XMLHttpRequest();
+                request.open('POST','/posts');
+                request.onload = () => {
+                    console.log(request.responseText)
+                    const data = JSON.parse(request.responseText);
+                    data.forEach(add_post);//调用add_post函数
+                };
+
+                //发送请求前，准备ster,end数据，告诉HTTP request需要什么，
+                const data = new FormData;
+                data.append('start',start);
+                data.append('end',end);    
+
+                request.send(data);   
+            };
+
+            
+
+            
+
+            function add_post(contents){
+                const post = document.createElement('div');
+                post.className = 'post';//和前面定义的css格式有关
+                post.innerHTML = contents;
+
+                //增加一个hide button
+                const hide = document.createElement('button');
+                hide.className = 'hide';//和前面定义的css格式有关
+                hide.innerHTML = 'Hide';
+                post.append(hide);
+
+
+                //add post to the DOM
+                document.querySelector('#posts').append(post);
+
+            };
+        </script>
+    </head>
+    <body>      
+        <div id = "posts"></div>
+    </body>
+</html>
